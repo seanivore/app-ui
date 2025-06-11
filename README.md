@@ -20,6 +20,7 @@ You can find exactly what you need to make your product stand out. There is no s
 
   - Claude Code Agentic Coding CLI 
   - Anthropic API Console 
+  - GitHub Pages, Jekyll, and Markdown 
   - Mac OS Terminal 
 
 ## How It Works
@@ -39,3 +40,55 @@ You can find exactly what you need to make your product stand out. There is no s
     - Sub-Agent Distribution 
   - Deep Knowledge of User-Interface Design 
 
+## Portfolio Website File Structure 
+
+```
+├── _config.yml
+├── CNAME
+├── index.html
+├── README.md 
+├── .claude
+│   ├── commands 
+│   │   └── prime.md 
+│   └── settings.json 
+├── assets
+│   ├── css 
+│   ├── js  
+│   ├── favicon 
+│   └── images  
+├── messenger
+│   ├── active-mission-security-updates.html
+│   ├── ai-creative-collaboration-interface.html
+│   ├── collaborative-creator-studio.html
+│   ├── combat-objective-feed.html
+│   ├── community-storyboard.html
+│   ├── explorers-discovery-group-database.html
+│   ├── gamer-legion-ai-council.html
+│   ├── industrial-design-network.html
+│   ├── interactive-wisdom-index.html
+│   ├── lovers-romance-planner.html
+│   ├── mystics-ancient-wisdom-vault.html
+│   ├── tactical-command-interface.html
+│   └── travelers-cultural-exchange.html
+├── mobile
+│   ├── crisis-response-dashboard.html
+│   ├── ecosystem-orchestrator.html
+│   ├── manufacturing-plant-status-tracker.html
+│   ├── neural-task-manager.html
+│   └── quantum-hub-chat.html
+├── tablet
+│   ├── fleet-mission-control.html
+│   ├── flight-tower-control.html
+│   ├── navy-fleet-command-center.html
+│   ├── swarm-intelligence-dashboard.html
+│   └── zenith-radio-interface.html
+└── web
+    ├── advanced-labratory-science-interface.html
+    ├── complex-data-overview.html
+    ├── enterprise-control-interface.html
+    ├── interactive-developer-terminal-suite.html
+    ├── ocean-conditions-monitor.html
+    ├── paper-producivity-organizer.html
+    ├── playful-micro-interaction-commerce.html
+    └── zoom-glass-photo-gallary.html
+```
