@@ -1,53 +1,41 @@
-# AI Resources Repository
+# Portfolio of AI-Generated App User-Interface Design Solutions
 
-Place to organize actual AI `./resources/` directory, a resource that gets copied into all new project by using the `./repo-starter/` directory. This AI directory also houses main copies of CORE DOCS as templates, and Claude OS app workspace documents that breakdown using tools written in JSON, including a copy for Cursor, both of which have protocol for the Memory system used to manage projects in concert, and then a master map file for all projects. 
+## Overview  
 
-## Repo Starter & AI Resources 
+Studying the latest trends in design languages and application user-interface solutions, AI agents generate application designs that solve complex problems, often combining multiple components into one simple, elegant interface component. 
 
-The `_ai` directory contains Claude-designed UI documents for AI workspaces. 
+## Process & Benefits 
 
-- Workspace configuration files
-  - Project management memory system protocol 
-  - Memory system keywords 
-  - Tools listed in JSON format 
-  - Master map for all project planning and task management 
+It starts with one AI that takes a highly detailed modern design specifications and generates multiple unique design prompts. These prompts are assigned to subagents that run in parallel, in waves of five at a time. Each workflow easily produces 20-30 unique designs in a matter of minutes, for pennies on the dollar. 
 
-- The `repo-starter` directory includes pre-configured:
-  - `.gitignore` optimized for AI development
-  - `.cursor/rules/` ready for rules, etc. 
-  - `.vscode/` with copy of settings and template Cursor workspace file 
-  - CORE DOCS as templates 
-  - The full AI `./resources/` directory 
-  - Directory full of markdown CSS files 
-  - Sample Aider config file 
+Great work comes from great prompting. The AI are only as good as the context they are provided. Still, the AI are able to generate a wide range of designs that would take human designers many hours to produce, for exorbitant costs. 
 
-## Usage
+This allows for a new way of thinking about design work and production process. Mass production of high-quality designs allow you to think more strategically the product; about how exactly form follow function. 
 
-### Starting a New Project
+At the same time, you have a surplus of mockups to explore where you can find a surprising amount of truly interesting and even innovative small details. Bigger aspects of the design are easily introduced for the AI to explore and iterate on, such as color palettes, typography, and other design elements. 
 
-1. Create a new project directory; slug style filename will be used for the project name 
-2. Copy contents from `repo-starter/` into your new directory with `cp -R /Users/seanivore/Development/_ai.resources/repo-starter/. .`
-3. Run `git init`
-4. Rename branch to mirror project name from project directory name 
-5. Create GitHub repo with same project name using `gh repo create <repo-project-name> --public --source=. --remote=origin` 
-6. Last, push the commit using `git push -u origin <repo-project-name>` to set `git push` as functional 
+You can find exactly what you need to make your product stand out. There is no shortage of creativity, only fresh methodology. 
 
-### MCP Resources
+# Technical Requirements  
 
-The `resources` directory contains essential reference materials:
+  - Claude Code Agentic Coding CLI 
+  - Anthropic API Console 
+  - Mac OS Terminal 
 
-- **MCP Core Concepts** - Foundational documentation on Model Context Protocol
-- **MCP Spec Schemas** - Technical specifications and JSON schemas
-- **MCP Test & Debug** - Tools and guides for testing MCP implementations
-- **Aider How To** - Aider documentation in TXT format
-- **About SFA** - About Single File Agents 
-- **LLM Context** - LLM Context how to; still confusing  
+## How It Works
 
-### MASTER_MAP
+1. **Specification Analysis**: Reads and understands the spec file requirements
+2. **Directory Reconnaissance**: Analyzes existing iterations to determine starting point
+3. **Parallel Coordination**: Deploys Sub Agents with unique creative directions
+4. **Quality Assurance**: Ensures each iteration is unique and spec-compliant
+5. **Wave Management**: For infinite mode, manages successive waves of agents
 
-The [MASTER_MAP.md](./AI.MASTER_MAP.md) is our central planning document that:
+## Understanding the Core Concepts 
 
-- Organizes all projects, tasks, and priorities in one place
-- Uses emoji indicators for visual task status tracking
-- Structures work into New Business, In Focus, and Old Business sections
-- Provides a foundation for automated task management via single-file agents
+  - Basic Coding Knowledge 
+  - General Understanding of Agentic Workflow 
+    - Parallel Execution 
+    - Orchestrator Management 
+    - Sub-Agent Distribution 
+  - Deep Knowledge of User-Interface Design 
+
