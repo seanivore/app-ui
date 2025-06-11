@@ -4,7 +4,7 @@ RUN:
     git ls-files
 
 READ:
-    .claude/ui_portfolio_spec.md
+    ./assets/docs/CLAUDE_CODE_TUTORIALS.md
 
 REVIEW:
     `memory` MCP server for entity "infinite-agentic-loop" 
