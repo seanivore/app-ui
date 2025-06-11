@@ -83,12 +83,12 @@ You can find exactly what you need to make your product stand out. There is no s
 │   ├── swarm-intelligence-dashboard.html
 │   └── zenith-radio-interface.html
 └── web
-    ├── advanced-labratory-science-interface.html
+    ├── advanced-laboratory-science-interface.html
     ├── complex-data-overview.html
     ├── enterprise-control-interface.html
     ├── interactive-developer-terminal-suite.html
     ├── ocean-conditions-monitor.html
-    ├── paper-producivity-organizer.html
+    ├── paper-productivity-organizer.html
     ├── playful-micro-interaction-commerce.html
-    └── zoom-glass-photo-gallary.html
+    └── zoom-glass-photo-gallery.html
 ```
