@@ -116,6 +116,17 @@ Based on your existing organized file structure:
      - `interactive-wisdom-index.html` -- just needs to be able to scroll 
      - `enterprise-control-interface.html` -- the search bar sits on top of tab navigation buttons 
 
+## Favicon HTML for <head> of Each File 
+
+```html
+<link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
+<link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="UI Design" />
+<link rel="manifest" href="/assets/favicon/site.webmanifest" />
+```
+
 ## Design Requirements
 
 ### **Homepage Slideshow Grid System**
