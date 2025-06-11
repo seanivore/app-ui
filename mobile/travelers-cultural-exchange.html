@@ -31,9 +31,12 @@
             background: linear-gradient(135deg, var(--earth-brown) 0%, var(--sunset-orange) 25%, var(--mystical-purple) 50%, var(--forest-green) 75%, var(--wanderer-blue) 100%);
             background-size: 400% 400%;
             animation: gradientShift 12s ease infinite;
-            min-height: 100vh;
+            height: 100vh;
             position: relative;
-            overflow-x: hidden;
+            overflow: hidden;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
         }
         
         @keyframes gradientShift {
@@ -96,14 +99,10 @@
         .main-container {
             position: relative;
             z-index: 2;
-            max-width: 480px;
-            margin: 0 auto;
+            width: 100%;
             height: 100vh;
             background: rgba(245, 245, 220, 0.95);
             backdrop-filter: blur(20px);
-            border: 2px solid rgba(139, 69, 19, 0.3);
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -112,21 +111,20 @@
         .header {
             background: linear-gradient(45deg, var(--earth-brown), var(--sunset-orange));
             color: white;
-            padding: 20px;
+            padding: 60px 20px 20px;
             text-align: center;
             position: relative;
-            border-radius: 28px 28px 0 0;
+            flex-shrink: 0;
         }
         
         .header::before {
             content: '';
             position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: linear-gradient(45deg, var(--mystical-purple), var(--forest-green), var(--wanderer-blue));
-            border-radius: 35px 35px 0 0;
             z-index: -1;
             opacity: 0.3;
             animation: headerGlow 3s ease-in-out infinite alternate;
@@ -155,6 +153,7 @@
             display: flex;
             background: rgba(139, 69, 19, 0.1);
             border-bottom: 1px solid rgba(139, 69, 19, 0.2);
+            flex-shrink: 0;
         }
         
         .nav-tab {
@@ -201,6 +200,7 @@
             overflow-y: auto;
             padding: 20px;
             background: linear-gradient(180deg, rgba(245, 245, 220, 0.8) 0%, rgba(188, 143, 143, 0.1) 100%);
+            -webkit-overflow-scrolling: touch;
         }
         
         .message {
@@ -331,7 +331,7 @@
             padding: 20px;
             background: linear-gradient(45deg, rgba(139, 69, 19, 0.1), rgba(255, 107, 53, 0.1));
             border-top: 1px solid rgba(139, 69, 19, 0.2);
-            border-radius: 0 0 28px 28px;
+            flex-shrink: 0;
         }
         
         .input-wrapper {
@@ -368,7 +368,7 @@
             outline: none;
             padding: 12px 15px;
             font-family: 'Comfortaa', cursive;
-            font-size: 14px;
+            font-size: 16px;
             background: transparent;
             color: var(--charcoal);
         }
@@ -505,30 +505,50 @@
             background: linear-gradient(135deg, var(--mystical-purple), var(--forest-green));
         }
         
-        /* Responsive design */
-        @media (max-width: 480px) {
-            .main-container {
-                margin: 0;
-                border-radius: 0;
-                height: 100vh;
+        /* Mobile-first optimizations */
+        @media (max-width: 768px) {
+            .floating-elements {
+                display: none;
             }
             
-            .header {
-                border-radius: 0;
+            .header h1 {
+                font-size: 24px;
             }
             
-            .input-container {
-                border-radius: 0;
+            .nav-tab {
+                padding: 12px 6px;
+                font-size: 11px;
             }
+            
+            .nav-tab .icon {
+                font-size: 16px;
+            }
+        }
+
+        /* Touch-friendly interactions */
+        .nav-tab, .message-bubble, .send-button, .attachment-btn {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        /* Prevent zoom on input focus */
+        .message-input {
+            transform: translateZ(0);
         }
         
         /* Tab content visibility */
         .tab-content {
             display: none;
+            height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
         
         .tab-content.active {
-            display: block;
+            display: flex;
+            flex-direction: column;
         }
     </style>
 </head>

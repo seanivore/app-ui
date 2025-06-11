@@ -1030,9 +1030,62 @@
             }
         });
 
-        // Initialize
+        // Enhanced initialization for tablet
         document.addEventListener('DOMContentLoaded', function() {
-            showInfo('Glass Morphism Gallery loaded! Click any image to explore all features.');
+            // Set initial viewport height for tablets
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            
+            // Enable smooth scrolling globally
+            document.documentElement.style.scrollBehavior = 'smooth';
+            
+            // Enhanced touch feedback for all interactive elements
+            const interactiveElements = document.querySelectorAll('.gallery-card, .glass-button, .share-button, .send-button, .feature-bubble, .color-swatch');
+            interactiveElements.forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                    this.style.transition = 'transform 0.1s ease';
+                }, { passive: true });
+                
+                element.addEventListener('touchend', function() {
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                        this.style.transition = 'transform 0.2s ease';
+                    }, 100);
+                }, { passive: true });
+            });
+            
+            // Enhanced color swatch interactions for tablet
+            const colorSwatches = document.querySelectorAll('.color-swatch');
+            colorSwatches.forEach(swatch => {
+                swatch.addEventListener('click', function() {
+                    const color = getComputedStyle(this).backgroundColor;
+                    this.style.transform = 'scale(1.2)';
+                    this.style.boxShadow = `0 0 20px ${color}`;
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                        this.style.boxShadow = '';
+                    }, 200);
+                    showInfo('🎨 Color selected! Perfect for your creative palette.');
+                });
+            });
+            
+            // Prevent double-tap zoom on tablets
+            document.addEventListener('touchend', function(e) {
+                if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                }
+            });
+            
+            showInfo('Glass Morphism Gallery optimized for tablet! Swipe and tap to explore all features.');
+        });
+        
+        // Handle tablet orientation changes
+        window.addEventListener('orientationchange', function() {
+            setTimeout(() => {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }, 100);
         });
     </script>
 </body>

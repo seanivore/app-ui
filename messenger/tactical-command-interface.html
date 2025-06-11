@@ -28,8 +28,9 @@
             font-family: 'Rajdhani', sans-serif;
             background: linear-gradient(135deg, var(--iron-black) 0%, var(--steel-gray) 100%);
             color: var(--metal-silver);
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
             position: relative;
         }
         
@@ -61,7 +62,7 @@
             display: grid;
             grid-template-columns: 300px 1fr 350px;
             grid-template-rows: 80px 1fr 100px;
-            height: 100vh;
+            min-height: 100vh;
             gap: 2px;
             background: var(--dark-steel);
             position: relative;

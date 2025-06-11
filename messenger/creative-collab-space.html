@@ -32,8 +32,9 @@
             font-family: 'Rajdhani', sans-serif;
             background: var(--void-black);
             color: var(--electric-blue);
-            overflow: hidden;
-            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            min-height: 100vh;
             position: relative;
         }
         
@@ -85,7 +86,7 @@
             display: grid;
             grid-template-columns: 300px 1fr 350px;
             grid-template-rows: 80px 1fr 120px;
-            height: 100vh;
+            min-height: 100vh;
             gap: 2px;
             padding: 2px;
             position: relative;

@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI UI Portfolio - Sean August Horvath</title>
+    <meta name="description" content="A showcase of 32 AI-generated user interfaces orchestrated through advanced Claude Code Agentic CLI workflows. By Sean August Horvath, Graphic Designer with 14 years experience.">
+    <meta name="keywords" content="UI Design, AI Generated, User Interface, Portfolio, Sean Horvath, Claude Code, Anthropic">
+    <meta name="author" content="Sean August Horvath">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="UI Design" />
+    <link rel="manifest" href="/assets/favicon/site.webmanifest" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2a2a2a;
+            --accent-color: #007aff;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --background: #000000;
+            --surface: #1c1c1c;
+            --border: #333333;
+            --shadow: rgba(0, 0, 0, 0.5);
+            --blur-bg: rgba(0, 0, 0, 0.8);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--blur-bg);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent-color), #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: 100vh;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(0, 122, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .ai-story {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-story::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-color), #00d4ff);
+        }
+
+        .ai-workflow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .workflow-step {
+            text-align: center;
+            padding: 1rem;
+            background: var(--secondary-color);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .workflow-step:hover {
+            transform: translateY(-2px);
+        }
+
+        .workflow-step h4 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Portfolio Grid Container */
+        .portfolio-container {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-navigation {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            gap: 1rem;
+        }
+
+        .category-btn {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .category-btn.active {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .category-btn:hover:not(.active) {
+            border-color: var(--accent-color);
+            color: var(--text-primary);
+        }
+
+        /* Grid System */
+        .grid-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+        }
+
+        .grid-wrapper {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-grid {
+            min-width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+        }
+
+        .grid-item {
+            aspect-ratio: 16/10;
+            background: var(--secondary-color);
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.02);
+            z-index: 10;
+        }
+
+        .grid-item.category-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--accent-color), #00d4ff);
+            cursor: default;
+        }
+
+        .grid-item.category-title:hover {
+            transform: none;
+        }
+
+        .category-title h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .ui-preview {
+            width: 100%;
+            height: 100%;
+            border: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .grid-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 0%, rgba(0, 122, 255, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .grid-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Navigation Dots */
+        .navigation-dots {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        /* Full Screen Viewer */
+        .fullscreen-viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--background);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .viewer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: var(--blur-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .viewer-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .viewer-counter {
+            color: var(--text-secondary);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: var(--surface);
+        }
+
+        .viewer-content {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .viewer-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .viewer-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--blur-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .viewer-nav:hover {
+            background: var(--surface);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .viewer-nav.prev {
+            left: 2rem;
+        }
+
+        .viewer-nav.next {
+            right: 2rem;
+        }
+
+        /* Bio Section */
+        .bio-section {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .bio-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .bio-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--accent-color), #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .bio-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .bio-link {
+            padding: 0.75rem 1.5rem;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .bio-link:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--secondary-color);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Keyboard Shortcuts */
+        .shortcuts {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: var(--blur-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            z-index: 1001;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .portfolio-container {
+                padding: 1rem;
+            }
+
+            .category-navigation {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .category-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .bio-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .bio-links {
+                justify-content: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .shortcuts {
+                display: none;
+            }
+
+            .viewer-nav {
+                width: 40px;
+                height: 40px;
+            }
+
+            .viewer-nav.prev {
+                left: 1rem;
+            }
+
+            .viewer-nav.next {
+                right: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .ai-story {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .workflow-step {
+                padding: 0.75rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            border-top-color: var(--accent-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Smooth Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        /* Touch Gestures Support */
+        .grid-container {
+            touch-action: pan-x;
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .grid-item:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        button:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">AI UI Portfolio</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="https://design.august.style" target="_blank">More Work</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>AI-Orchestrated UI Design</h1>
+            <p>32 unique user interfaces generated through advanced Claude Code Agentic CLI workflows, showcasing the future of design automation and human-AI collaboration.</p>
+            
+            <div class="ai-story">
+                <h3>The AI Orchestration Process</h3>
+                <p>Each interface in this collection was crafted through a sophisticated AI workflow that transforms specifications into production-ready designs.</p>
+                
+                <div class="ai-workflow">
+                    <div class="workflow-step">
+                        <h4>Specification Analysis</h4>
+                        <p>Claude Code analyzes design requirements and user stories</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Parallel AI Coordination</h4>
+                        <p>Multiple AI agents work simultaneously on different components</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Wave Management</h4>
+                        <p>Systematic generation across device categories and contexts</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Quality Assurance</h4>
+                        <p>Automated testing and refinement of generated interfaces</p>
+                    </div>
+                </div>
+                
+                <p><strong>Technology Stack:</strong> Claude Code Agentic CLI, Anthropic API, Advanced Prompt Engineering</p>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="portfolio-container">
+            <div class="category-navigation">
+                <button class="category-btn active" data-category="0">Messenger</button>
+                <button class="category-btn" data-category="1">Mobile</button>
+                <button class="category-btn" data-category="2">Tablet</button>
+                <button class="category-btn" data-category="3">Web</button>
+            </div>
+
+            <div class="grid-container">
+                <div class="grid-wrapper" id="gridWrapper">
+                    
+                    <!-- Messenger Category -->
+                    <div class="category-grid">
+                        <div class="grid-item category-title">
+                            <h3>Messenger</h3>
+                        </div>
+                        <div class="grid-item ui-item" data-category="messenger" data-file="creative-collab-space.html" data-title="Creative Collab Space">
+                            <iframe class="ui-preview" src="messenger/creative-collab-space.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="messenger" data-file="combat-objective-feed.html" data-title="Combat Objective Feed">
+                            <iframe class="ui-preview" src="messenger/combat-objective-feed.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="messenger" data-file="discovery-group-database.html" data-title="Discovery Group Database">
+                            <iframe class="ui-preview" src="messenger/discovery-group-database.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="messenger" data-file="gamer-legion-ai-council.html" data-title="Gamer Legion AI Council">
+                            <iframe class="ui-preview" src="messenger/gamer-legion-ai-council.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="messenger" data-file="industrial-design-network.html" data-title="Industrial Design Network">
+                            <iframe class="ui-preview" src="messenger/industrial-design-network.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="messenger" data-file="mission-security-updates.html" data-title="Mission Security Updates">
+                            <iframe class="ui-preview" src="messenger/mission-security-updates.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="messenger" data-file="mystics-ancient-wisdom-vault.html" data-title="Mystics Ancient Wisdom Vault">
+                            <iframe class="ui-preview" src="messenger/mystics-ancient-wisdom-vault.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="messenger" data-file="tactical-command-interface.html" data-title="Tactical Command Interface">
+                            <iframe class="ui-preview" src="messenger/tactical-command-interface.html" loading="lazy"></iframe>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Category -->
+                    <div class="category-grid">
+                        <div class="grid-item category-title">
+                            <h3>Mobile</h3>
+                        </div>
+                        <div class="grid-item ui-item" data-category="mobile" data-file="community-storyboard.html" data-title="Community Storyboard">
+                            <iframe class="ui-preview" src="mobile/community-storyboard.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="mobile" data-file="crisis-response-dashboard.html" data-title="Crisis Response Dashboard">
+                            <iframe class="ui-preview" src="mobile/crisis-response-dashboard.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="mobile" data-file="ecosystem-orchestrator.html" data-title="Ecosystem Orchestrator">
+                            <iframe class="ui-preview" src="mobile/ecosystem-orchestrator.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="mobile" data-file="lovers-romance-planner.html" data-title="Lovers Romance Planner">
+                            <iframe class="ui-preview" src="mobile/lovers-romance-planner.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="mobile" data-file="manufacturing-plant-status-tracker.html" data-title="Manufacturing Plant Status Tracker">
+                            <iframe class="ui-preview" src="mobile/manufacturing-plant-status-tracker.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="mobile" data-file="neural-task-manager.html" data-title="Neural Task Manager">
+                            <iframe class="ui-preview" src="mobile/neural-task-manager.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="mobile" data-file="quantum-hub-chat.html" data-title="Quantum Hub Chat">
+                            <iframe class="ui-preview" src="mobile/quantum-hub-chat.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="mobile" data-file="travelers-cultural-exchange.html" data-title="Travelers Cultural Exchange">
+                            <iframe class="ui-preview" src="mobile/travelers-cultural-exchange.html" loading="lazy"></iframe>
+                        </div>
+                    </div>
+
+                    <!-- Tablet Category -->
+                    <div class="category-grid">
+                        <div class="grid-item category-title">
+                            <h3>Tablet</h3>
+                        </div>
+                        <div class="grid-item ui-item" data-category="tablet" data-file="cellular-orchestra-conductor.html" data-title="Cellular Orchestra Conductor">
+                            <iframe class="ui-preview" src="tablet/cellular-orchestra-conductor.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="tablet" data-file="collaborative-creator-studio.html" data-title="Collaborative Creator Studio">
+                            <iframe class="ui-preview" src="tablet/collaborative-creator-studio.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="tablet" data-file="fleet-mission-control.html" data-title="Fleet Mission Control">
+                            <iframe class="ui-preview" src="tablet/fleet-mission-control.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="tablet" data-file="flight-tower-control.html" data-title="Flight Tower Control">
+                            <iframe class="ui-preview" src="tablet/flight-tower-control.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="tablet" data-file="navy-fleet-command-center.html" data-title="Navy Fleet Command Center">
+                            <iframe class="ui-preview" src="tablet/navy-fleet-command-center.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="tablet" data-file="swarm-intelligence-dashboard.html" data-title="Swarm Intelligence Dashboard">
+                            <iframe class="ui-preview" src="tablet/swarm-intelligence-dashboard.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="tablet" data-file="zenith-radio-interface.html" data-title="Zenith Radio Interface">
+                            <iframe class="ui-preview" src="tablet/zenith-radio-interface.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="tablet" data-file="zoom-glass-photo-gallery.html" data-title="Zoom Glass Photo Gallery">
+                            <iframe class="ui-preview" src="tablet/zoom-glass-photo-gallery.html" loading="lazy"></iframe>
+                        </div>
+                    </div>
+
+                    <!-- Web Category -->
+                    <div class="category-grid">
+                        <div class="grid-item category-title">
+                            <h3>Web</h3>
+                        </div>
+                        <div class="grid-item ui-item" data-category="web" data-file="advanced-laboratory-interface.html" data-title="Advanced Laboratory Interface">
+                            <iframe class="ui-preview" src="web/advanced-laboratory-interface.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="web" data-file="complex-data-overview.html" data-title="Complex Data Overview">
+                            <iframe class="ui-preview" src="web/complex-data-overview.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="web" data-file="enterprise-control-interface.html" data-title="Enterprise Control Interface">
+                            <iframe class="ui-preview" src="web/enterprise-control-interface.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="web" data-file="interactive-developer-terminal.html" data-title="Interactive Developer Terminal">
+                            <iframe class="ui-preview" src="web/interactive-developer-terminal.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="web" data-file="interactive-wisdom-index.html" data-title="Interactive Wisdom Index">
+                            <iframe class="ui-preview" src="web/interactive-wisdom-index.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="web" data-file="ocean-conditions-monitor.html" data-title="Ocean Conditions Monitor">
+                            <iframe class="ui-preview" src="web/ocean-conditions-monitor.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="web" data-file="paper-productivity-organizer.html" data-title="Paper Productivity Organizer">
+                            <iframe class="ui-preview" src="web/paper-productivity-organizer.html" loading="lazy"></iframe>
+                        </div>
+                        <div class="grid-item ui-item" data-category="web" data-file="playful-interaction-commerce.html" data-title="Playful Interaction Commerce">
+                            <iframe class="ui-preview" src="web/playful-interaction-commerce.html" loading="lazy"></iframe>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="navigation-dots">
+                <div class="dot active" data-category="0"></div>
+                <div class="dot" data-category="1"></div>
+                <div class="dot" data-category="2"></div>
+                <div class="dot" data-category="3"></div>
+            </div>
+        </section>
+
+        <!-- Bio Section -->
+        <section id="about" class="bio-section">
+            <div class="bio-content">
+                <div class="bio-text">
+                    <h2>Sean August Horvath</h2>
+                    <p>Graphic Designer with 14 years experience in production, social media strategy, and user experience. I'm passionate about using design to make complexity accessible and engaging.</p>
+                    <p>This portfolio represents a glimpse into the future of design production, where AI orchestration amplifies human creativity and enables unprecedented scale and consistency.</p>
+                    
+                    <div class="bio-links">
+                        <a href="https://linkedin.com/in/seanivore" target="_blank" class="bio-link">LinkedIn</a>
+                        <a href="https://github.com/seanivore" target="_blank" class="bio-link">GitHub</a>
+                        <a href="mailto:sean@august.style" class="bio-link">Email</a>
+                        <a href="https://design.august.style" target="_blank" class="bio-link">Portfolio</a>
+                        <a href="https://projects.august.style" target="_blank" class="bio-link">Projects</a>
+                    </div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">32</span>
+                        <div class="stat-label">AI-Generated UIs</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4</span>
+                        <div class="stat-label">Device Categories</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">14</span>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">∞</span>
+                        <div class="stat-label">Design Possibilities</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Full Screen Viewer -->
+    <div class="fullscreen-viewer" id="fullscreenViewer">
+        <div class="viewer-header">
+            <div class="viewer-title" id="viewerTitle">UI Preview</div>
+            <div class="viewer-counter" id="viewerCounter">1 of 8</div>
+            <button class="close-btn" id="closeViewer" aria-label="Close viewer">×</button>
+        </div>
+        <div class="viewer-content">
+            <iframe class="viewer-iframe" id="viewerIframe" src=""></iframe>
+            <div class="viewer-nav prev" id="prevBtn" aria-label="Previous UI">‹</div>
+            <div class="viewer-nav next" id="nextBtn" aria-label="Next UI">›</div>
+        </div>
+    </div>
+
+    <!-- Keyboard Shortcuts -->
+    <div class="shortcuts">
+        <div><strong>Shortcuts:</strong></div>
+        <div>← → Navigate UIs</div>
+        <div>1-4 Switch categories</div>
+        <div>ESC Close viewer</div>
+    </div>
+
+    <script>
+        class UIPortfolio {
+            constructor() {
+                this.currentCategory = 0;
+                this.currentUIIndex = 0;
+                this.categories = ['messenger', 'mobile', 'tablet', 'web'];
+                this.uiData = this.buildUIData();
+                this.isViewerOpen = false;
+                
+                this.init();
+            }
+
+            buildUIData() {
+                const data = {
+                    messenger: [
+                        { file: 'creative-collab-space.html', title: 'Creative Collab Space' },
+                        { file: 'combat-objective-feed.html', title: 'Combat Objective Feed' },
+                        { file: 'discovery-group-database.html', title: 'Discovery Group Database' },
+                        { file: 'gamer-legion-ai-council.html', title: 'Gamer Legion AI Council' },
+                        { file: 'industrial-design-network.html', title: 'Industrial Design Network' },
+                        { file: 'mission-security-updates.html', title: 'Mission Security Updates' },
+                        { file: 'mystics-ancient-wisdom-vault.html', title: 'Mystics Ancient Wisdom Vault' },
+                        { file: 'tactical-command-interface.html', title: 'Tactical Command Interface' }
+                    ],
+                    mobile: [
+                        { file: 'community-storyboard.html', title: 'Community Storyboard' },
+                        { file: 'crisis-response-dashboard.html', title: 'Crisis Response Dashboard' },
+                        { file: 'ecosystem-orchestrator.html', title: 'Ecosystem Orchestrator' },
+                        { file: 'lovers-romance-planner.html', title: 'Lovers Romance Planner' },
+                        { file: 'manufacturing-plant-status-tracker.html', title: 'Manufacturing Plant Status Tracker' },
+                        { file: 'neural-task-manager.html', title: 'Neural Task Manager' },
+                        { file: 'quantum-hub-chat.html', title: 'Quantum Hub Chat' },
+                        { file: 'travelers-cultural-exchange.html', title: 'Travelers Cultural Exchange' }
+                    ],
+                    tablet: [
+                        { file: 'cellular-orchestra-conductor.html', title: 'Cellular Orchestra Conductor' },
+                        { file: 'collaborative-creator-studio.html', title: 'Collaborative Creator Studio' },
+                        { file: 'fleet-mission-control.html', title: 'Fleet Mission Control' },
+                        { file: 'flight-tower-control.html', title: 'Flight Tower Control' },
+                        { file: 'navy-fleet-command-center.html', title: 'Navy Fleet Command Center' },
+                        { file: 'swarm-intelligence-dashboard.html', title: 'Swarm Intelligence Dashboard' },
+                        { file: 'zenith-radio-interface.html', title: 'Zenith Radio Interface' },
+                        { file: 'zoom-glass-photo-gallery.html', title: 'Zoom Glass Photo Gallery' }
+                    ],
+                    web: [
+                        { file: 'advanced-laboratory-interface.html', title: 'Advanced Laboratory Interface' },
+                        { file: 'complex-data-overview.html', title: 'Complex Data Overview' },
+                        { file: 'enterprise-control-interface.html', title: 'Enterprise Control Interface' },
+                        { file: 'interactive-developer-terminal.html', title: 'Interactive Developer Terminal' },
+                        { file: 'interactive-wisdom-index.html', title: 'Interactive Wisdom Index' },
+                        { file: 'ocean-conditions-monitor.html', title: 'Ocean Conditions Monitor' },
+                        { file: 'paper-productivity-organizer.html', title: 'Paper Productivity Organizer' },
+                        { file: 'playful-interaction-commerce.html', title: 'Playful Interaction Commerce' }
+                    ]
+                };
+                return data;
+            }
+
+            init() {
+                this.bindEvents();
+                this.setupTouchGestures();
+                this.initializeAnimations();
+            }
+
+            bindEvents() {
+                // Category navigation
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const category = parseInt(e.target.dataset.category);
+                        this.switchCategory(category);
+                    });
+                });
+
+                // Navigation dots
+                document.querySelectorAll('.dot').forEach(dot => {
+                    dot.addEventListener('click', (e) => {
+                        const category = parseInt(e.target.dataset.category);
+                        this.switchCategory(category);
+                    });
+                });
+
+                // UI item clicks
+                document.querySelectorAll('.ui-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        const category = item.dataset.category;
+                        const file = item.dataset.file;
+                        const title = item.dataset.title;
+                        this.openFullscreenViewer(category, file, title);
+                    });
+                });
+
+                // Fullscreen viewer events
+                document.getElementById('closeViewer').addEventListener('click', () => {
+                    this.closeFullscreenViewer();
+                });
+
+                document.getElementById('prevBtn').addEventListener('click', () => {
+                    this.navigateUI(-1);
+                });
+
+                document.getElementById('nextBtn').addEventListener('click', () => {
+                    this.navigateUI(1);
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    this.handleKeyboardNavigation(e);
+                });
+
+                // Smooth scrolling for nav links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+            }
+
+            setupTouchGestures() {
+                const gridContainer = document.querySelector('.grid-container');
+                let startX, startY, currentX, currentY;
+                let isDragging = false;
+
+                gridContainer.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                    isDragging = true;
+                }, { passive: true });
+
+                gridContainer.addEventListener('touchmove', (e) => {
+                    if (!isDragging) return;
+                    currentX = e.touches[0].clientX;
+                    currentY = e.touches[0].clientY;
+                }, { passive: true });
+
+                gridContainer.addEventListener('touchend', () => {
+                    if (!isDragging) return;
+                    isDragging = false;
+
+                    const deltaX = currentX - startX;
+                    const deltaY = currentY - startY;
+
+                    // Only trigger if horizontal swipe is dominant
+                    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                        if (deltaX > 0 && this.currentCategory > 0) {
+                            this.switchCategory(this.currentCategory - 1);
+                        } else if (deltaX < 0 && this.currentCategory < 3) {
+                            this.switchCategory(this.currentCategory + 1);
+                        }
+                    }
+                }, { passive: true });
+            }
+
+            switchCategory(categoryIndex) {
+                if (categoryIndex === this.currentCategory) return;
+
+                this.currentCategory = categoryIndex;
+                
+                // Update UI
+                this.updateCategoryButtons();
+                this.updateNavigationDots();
+                this.animateGridTransition();
+            }
+
+            updateCategoryButtons() {
+                document.querySelectorAll('.category-btn').forEach((btn, index) => {
+                    btn.classList.toggle('active', index === this.currentCategory);
+                });
+            }
+
+            updateNavigationDots() {
+                document.querySelectorAll('.dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentCategory);
+                });
+            }
+
+            animateGridTransition() {
+                const gridWrapper = document.getElementById('gridWrapper');
+                const translateX = -this.currentCategory * 100;
+                gridWrapper.style.transform = `translateX(${translateX}%)`;
+            }
+
+            openFullscreenViewer(category, file, title) {
+                const viewer = document.getElementById('fullscreenViewer');
+                const iframe = document.getElementById('viewerIframe');
+                const titleEl = document.getElementById('viewerTitle');
+                
+                // Find the UI index in the category
+                const categoryData = this.uiData[category];
+                this.currentUIIndex = categoryData.findIndex(ui => ui.file === file);
+                
+                // Set the current category for navigation
+                this.currentViewerCategory = category;
+                
+                iframe.src = `${category}/${file}`;
+                titleEl.textContent = title;
+                
+                this.updateViewerCounter();
+                
+                viewer.style.display = 'flex';
+                this.isViewerOpen = true;
+                
+                // Prevent body scroll
+                document.body.style.overflow = 'hidden';
+                
+                // Focus management for accessibility
+                document.getElementById('closeViewer').focus();
+            }
+
+            closeFullscreenViewer() {
+                const viewer = document.getElementById('fullscreenViewer');
+                viewer.style.display = 'none';
+                this.isViewerOpen = false;
+                
+                // Restore body scroll
+                document.body.style.overflow = '';
+            }
+
+            navigateUI(direction) {
+                if (!this.isViewerOpen) return;
+                
+                const categoryData = this.uiData[this.currentViewerCategory];
+                this.currentUIIndex += direction;
+                
+                // Wrap around
+                if (this.currentUIIndex < 0) {
+                    this.currentUIIndex = categoryData.length - 1;
+                } else if (this.currentUIIndex >= categoryData.length) {
+                    this.currentUIIndex = 0;
+                }
+                
+                const currentUI = categoryData[this.currentUIIndex];
+                const iframe = document.getElementById('viewerIframe');
+                const titleEl = document.getElementById('viewerTitle');
+                
+                iframe.src = `${this.currentViewerCategory}/${currentUI.file}`;
+                titleEl.textContent = currentUI.title;
+                
+                this.updateViewerCounter();
+            }
+
+            updateViewerCounter() {
+                const counter = document.getElementById('viewerCounter');
+                const categoryData = this.uiData[this.currentViewerCategory];
+                counter.textContent = `${this.currentUIIndex + 1} of ${categoryData.length}`;
+            }
+
+            handleKeyboardNavigation(e) {
+                // Category switching (1-4 keys)
+                if (e.key >= '1' && e.key <= '4' && !this.isViewerOpen) {
+                    const categoryIndex = parseInt(e.key) - 1;
+                    this.switchCategory(categoryIndex);
+                    return;
+                }
+
+                // Viewer navigation
+                if (this.isViewerOpen) {
+                    switch (e.key) {
+                        case 'Escape':
+                            this.closeFullscreenViewer();
+                            break;
+                        case 'ArrowLeft':
+                            this.navigateUI(-1);
+                            break;
+                        case 'ArrowRight':
+                            this.navigateUI(1);
+                            break;
+                    }
+                    return;
+                }
+
+                // Grid navigation when not in viewer
+                switch (e.key) {
+                    case 'ArrowLeft':
+                        if (this.currentCategory > 0) {
+                            this.switchCategory(this.currentCategory - 1);
+                        }
+                        break;
+                    case 'ArrowRight':
+                        if (this.currentCategory < 3) {
+                            this.switchCategory(this.currentCategory + 1);
+                        }
+                        break;
+                }
+            }
+
+            initializeAnimations() {
+                // Animate elements on scroll
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('fade-in');
+                        }
+                    });
+                }, observerOptions);
+
+                // Observe elements for animation
+                document.querySelectorAll('.ai-story, .stat-item, .workflow-step').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+        }
+
+        // Initialize the portfolio when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new UIPortfolio();
+        });
+
+        // Preload critical resources
+        window.addEventListener('load', () => {
+            // Preload first few UI previews for better performance
+            const preloadCategories = ['messenger', 'mobile'];
+            preloadCategories.forEach(category => {
+                const link = document.createElement('link');
+                link.rel = 'prefetch';
+                link.href = `${category}/`;
+                document.head.appendChild(link);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -222,12 +222,31 @@
         .section-content.folded {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            padding-top: 0;
+            padding-bottom: 0;
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         .section-content {
             max-height: 1000px;
-            transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: visible;
+            opacity: 1;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .paper-section.folded {
+            transform: perspective(1000px) rotateX(-2deg) scaleY(0.3);
+            transform-origin: top center;
+            box-shadow: 
+                0 2px 8px rgba(139, 101, 75, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        .paper-section {
+            transform: perspective(1000px) rotateX(0deg) scaleY(1);
+            transform-origin: top center;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         /* Todo List Styles */
@@ -789,13 +808,28 @@
             const button = section.querySelector('.fold-button');
             
             if (content.classList.contains('folded')) {
+                // Unfold animation
                 content.classList.remove('folded');
+                section.classList.remove('folded');
                 section.classList.add('unfolding');
                 button.style.transform = 'rotate(45deg)';
-                setTimeout(() => section.classList.remove('unfolding'), 600);
+                button.querySelector('::after') && (button.style.setProperty('--fold-icon-rotation', '0deg'));
+                
+                setTimeout(() => {
+                    section.classList.remove('unfolding');
+                }, 600);
             } else {
+                // Fold animation
                 content.classList.add('folded');
+                section.classList.add('folded');
                 button.style.transform = 'rotate(0deg)';
+                button.querySelector('::after') && (button.style.setProperty('--fold-icon-rotation', '90deg'));
+                
+                // Add paper crease effect
+                section.style.filter = 'brightness(0.95)';
+                setTimeout(() => {
+                    section.style.filter = 'brightness(1)';
+                }, 300);
             }
         }
         

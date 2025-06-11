@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>The Artist - Neon Creative Hub</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
@@ -33,16 +33,20 @@
                         var(--dark-bg);
             background-attachment: fixed;
             color: #ffffff;
-            overflow: hidden;
-            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            min-height: 100vh;
             position: relative;
+            /* Tablet optimizations */
+            touch-action: manipulation;
+            -webkit-overflow-scrolling: touch;
         }
 
         .app-container {
             display: grid;
             grid-template-columns: 280px 1fr 320px;
             grid-template-rows: 70px 1fr;
-            height: 100vh;
+            min-height: 100vh;
             gap: 2px;
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
@@ -117,6 +121,8 @@
             backdrop-filter: blur(10px);
             padding: 20px;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
         }
 
         .sidebar-section {
@@ -247,6 +253,8 @@
             flex: 1;
             padding: 20px;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
         }
 
         .canvas-area {
@@ -300,6 +308,8 @@
             border-radius: 8px;
             height: 250px;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
             padding: 15px;
             margin-bottom: 15px;
         }
@@ -351,6 +361,8 @@
             backdrop-filter: blur(10px);
             padding: 20px;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
         }
 
         .inspiration-feed {
@@ -536,14 +548,100 @@
             box-shadow: var(--glow-intensity) var(--neon-pink);
         }
 
-        /* Responsive Design */
-        @media (max-width: 1200px) {
+        /* Tablet Optimizations */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .app-container {
+                grid-template-columns: 240px 1fr 260px;
+                grid-template-rows: 60px 1fr;
+            }
+            
+            .neon-header {
+                padding: 0 16px;
+            }
+            
+            .app-title {
+                font-size: 20px;
+            }
+            
+            .sidebar, .inspiration-panel {
+                padding: 16px;
+            }
+            
+            .workspace-content {
+                padding: 16px;
+            }
+            
+            .canvas-area {
+                height: 280px;
+                margin-bottom: 16px;
+            }
+            
+            .chat-messages {
+                height: 220px;
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+            
+            .collab-room, .agent-card {
+                padding: 10px;
+                margin-bottom: 8px;
+                border-radius: 6px;
+            }
+            
+            .inspiration-item {
+                padding: 12px;
+                margin-bottom: 12px;
+                border-radius: 6px;
+            }
+            
+            /* Enhanced scrolling for tablet */
+            .workspace-content,
+            .chat-messages,
+            .sidebar,
+            .inspiration-panel {
+                scrollbar-width: thin;
+                scrollbar-color: var(--neon-blue) transparent;
+            }
+            
+            .workspace-content::-webkit-scrollbar,
+            .chat-messages::-webkit-scrollbar,
+            .sidebar::-webkit-scrollbar,
+            .inspiration-panel::-webkit-scrollbar {
+                width: 8px;
+            }
+            
+            .workspace-content::-webkit-scrollbar-track,
+            .chat-messages::-webkit-scrollbar-track,
+            .sidebar::-webkit-scrollbar-track,
+            .inspiration-panel::-webkit-scrollbar-track {
+                background: rgba(0, 0, 0, 0.1);
+                border-radius: 4px;
+            }
+            
+            .workspace-content::-webkit-scrollbar-thumb,
+            .chat-messages::-webkit-scrollbar-thumb,
+            .sidebar::-webkit-scrollbar-thumb,
+            .inspiration-panel::-webkit-scrollbar-thumb {
+                background: var(--neon-blue);
+                border-radius: 4px;
+                opacity: 0.6;
+            }
+            
+            .workspace-content::-webkit-scrollbar-thumb:hover,
+            .chat-messages::-webkit-scrollbar-thumb:hover,
+            .sidebar::-webkit-scrollbar-thumb:hover,
+            .inspiration-panel::-webkit-scrollbar-thumb:hover {
+                opacity: 1;
+            }
+        }
+        
+        @media (max-width: 1200px) and (min-width: 1025px) {
             .app-container {
                 grid-template-columns: 250px 1fr 280px;
             }
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 767px) {
             .app-container {
                 grid-template-columns: 1fr;
                 grid-template-rows: 70px 1fr;
@@ -554,23 +652,53 @@
             }
         }
 
-        /* Scrollbar Styling */
+        /* Enhanced Scrollbar Styling for Tablet */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
 
         ::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
         }
 
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
-            border-radius: 4px;
+            border-radius: 5px;
             box-shadow: var(--glow-intensity) var(--neon-purple);
         }
 
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
+        }
+        
+        /* Touch-friendly elements for tablet */
+        .collab-room,
+        .agent-card,
+        .inspiration-item,
+        .color-swatch,
+        .send-btn,
+        .chat-input,
+        .workspace-tab {
+            touch-action: manipulation;
+            cursor: pointer;
+        }
+        
+        /* Minimum touch target sizes for tablet */
+        .collab-room,
+        .agent-card,
+        .workspace-tab {
+            min-height: 44px;
+        }
+        
+        .send-btn {
+            min-width: 44px;
+            min-height: 44px;
+        }
+        
+        .color-swatch {
+            min-width: 24px;
+            min-height: 24px;
         }
     </style>
 </head>
@@ -889,6 +1017,43 @@
                 }
             });
         }, 3000);
+        
+        // Enhanced tablet scrolling behavior
+        function initializeTabletScrolling() {
+            const scrollableElements = document.querySelectorAll('.workspace-content, .chat-messages, .sidebar, .inspiration-panel');
+            
+            scrollableElements.forEach(element => {
+                element.addEventListener('scroll', function() {
+                    // Add scroll indicator or other visual feedback if needed
+                }, { passive: true });
+                
+                // Smooth scroll to top on double-tap header
+                const header = element.closest('.app-container')?.querySelector('.neon-header');
+                if (header) {
+                    let lastTap = 0;
+                    header.addEventListener('touchend', function(e) {
+                        const currentTime = new Date().getTime();
+                        const tapLength = currentTime - lastTap;
+                        if (tapLength < 500 && tapLength > 0) {
+                            element.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                        lastTap = currentTime;
+                    });
+                }
+            });
+        }
+        
+        // Handle tablet orientation changes
+        window.addEventListener('orientationchange', function() {
+            setTimeout(() => {
+                // Recalculate viewport dimensions
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+                
+                // Re-initialize scrolling if needed
+                initializeTabletScrolling();
+            }, 100);
+        });
 
         // Collaboration room interactions
         document.addEventListener('DOMContentLoaded', function() {
@@ -961,6 +1126,19 @@
                     chatMessages.scrollTop = chatMessages.scrollHeight;
                 });
             });
+        });
+        
+        // Initialize tablet optimizations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial viewport height for tablets
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            
+            // Initialize tablet scrolling
+            initializeTabletScrolling();
+            
+            // Add smooth scrolling behavior
+            document.documentElement.style.scrollBehavior = 'smooth';
         });
     </script>
 </body>

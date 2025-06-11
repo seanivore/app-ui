@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Swarm Intelligence Workflow Monitor</title>
     <style>
         :root {
@@ -28,16 +28,21 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--dark-hive);
             color: var(--drone-white);
-            overflow: hidden;
-            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            min-height: 100vh;
             -webkit-user-select: none;
             user-select: none;
+            /* Tablet optimizations */
+            touch-action: manipulation;
+            -webkit-overflow-scrolling: touch;
         }
 
         .swarm-interface {
             display: grid;
             grid-template-rows: 60px 1fr 180px;
-            height: 100vh;
+            min-height: 100vh;
+            height: auto;
             background: radial-gradient(circle at center, #2a1a0f 0%, #1a0f0a 100%);
         }
 
@@ -256,6 +261,8 @@
             border-radius: 15px;
             padding: 15px;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
         }
 
         .control-section {
@@ -381,6 +388,8 @@
             border-top: 2px solid var(--hive-amber);
             padding: 15px 20px;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
         }
 
         .timeline-header {
@@ -427,6 +436,8 @@
             display: flex;
             gap: 15px;
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
             padding-bottom: 10px;
         }
 
@@ -522,6 +533,8 @@
             padding: 12px;
             height: 120px;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
             font-size: 10px;
             font-family: 'Courier New', monospace;
             color: var(--hive-amber);
@@ -544,8 +557,121 @@
             box-shadow: 0 0 10px rgba(65, 105, 225, 0.5);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
+        /* Tablet Optimizations */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .swarm-interface {
+                grid-template-rows: 50px 1fr 160px;
+            }
+            
+            .hive-header {
+                padding: 0 16px;
+            }
+            
+            .colony-id {
+                font-size: 16px;
+            }
+            
+            .hive-metrics {
+                gap: 16px;
+                font-size: 11px;
+            }
+            
+            .swarm-section {
+                grid-template-columns: 1fr 280px;
+                gap: 16px;
+                padding: 16px;
+            }
+            
+            .swarm-control {
+                padding: 12px;
+            }
+            
+            .agent-info {
+                padding: 10px;
+                margin-bottom: 6px;
+                border-radius: 8px;
+            }
+            
+            .intelligence-timeline {
+                padding: 12px 16px;
+            }
+            
+            .decision-item {
+                min-width: 240px;
+                padding: 12px;
+            }
+            
+            .swarm-comm {
+                width: 260px;
+                bottom: 12px;
+                right: 12px;
+            }
+            
+            .comm-display {
+                height: 100px;
+                padding: 10px;
+            }
+            
+            /* Enhanced touch targets for tablet */
+            .agent-swarm {
+                width: 12px;
+                height: 12px;
+                touch-action: manipulation;
+            }
+            
+            .agent-swarm.queen {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .agent-info,
+            .control-button,
+            .consensus-button {
+                min-height: 44px;
+                touch-action: manipulation;
+            }
+            
+            .comm-input {
+                min-height: 36px;
+                touch-action: manipulation;
+            }
+            
+            /* Enhanced scrollbars for tablet */
+            .swarm-control::-webkit-scrollbar,
+            .intelligence-timeline::-webkit-scrollbar,
+            .decision-feed::-webkit-scrollbar,
+            .comm-display::-webkit-scrollbar {
+                width: 8px;
+                height: 8px;
+            }
+            
+            .swarm-control::-webkit-scrollbar-track,
+            .intelligence-timeline::-webkit-scrollbar-track,
+            .decision-feed::-webkit-scrollbar-track,
+            .comm-display::-webkit-scrollbar-track {
+                background: rgba(255, 179, 71, 0.1);
+                border-radius: 4px;
+            }
+            
+            .swarm-control::-webkit-scrollbar-thumb,
+            .intelligence-timeline::-webkit-scrollbar-thumb,
+            .decision-feed::-webkit-scrollbar-thumb,
+            .comm-display::-webkit-scrollbar-thumb {
+                background: var(--hive-amber);
+                border-radius: 4px;
+                opacity: 0.6;
+            }
+            
+            .swarm-control::-webkit-scrollbar-thumb:hover,
+            .intelligence-timeline::-webkit-scrollbar-thumb:hover,
+            .decision-feed::-webkit-scrollbar-thumb:hover,
+            .comm-display::-webkit-scrollbar-thumb:hover {
+                opacity: 1;
+            }
+        }
+        
+        /* Mobile/Small Tablet */
+        @media (max-width: 767px) {
             .swarm-section {
                 grid-template-columns: 1fr;
                 grid-template-rows: 1fr 280px;
@@ -563,10 +689,13 @@
             }
         }
 
-        /* Touch Interactions */
+        /* Enhanced Touch Interactions for Tablet */
         .touch-feedback {
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            touch-action: manipulation;
         }
 
         .touch-feedback::after {
@@ -585,6 +714,12 @@
         .touch-feedback:active::after {
             width: 100px;
             height: 100px;
+        }
+        
+        /* Tablet-specific hover effects */
+        .touch-feedback:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(255, 179, 71, 0.2);
         }
 
         /* Swarm Optimization Visualization */
@@ -1134,23 +1269,49 @@
         setInterval(updateSwarmComm, 7000);
         setInterval(updateDecisionTimeline, 10000);
         
-        // Touch feedback for mobile
+        // Enhanced touch feedback for tablets
         document.addEventListener('touchstart', function(e) {
             if (e.target.classList.contains('touch-feedback')) {
                 e.target.style.transform = 'scale(0.95)';
+                e.target.style.transition = 'transform 0.1s ease';
             }
-        });
+        }, { passive: true });
         
         document.addEventListener('touchend', function(e) {
             if (e.target.classList.contains('touch-feedback')) {
                 setTimeout(() => {
                     e.target.style.transform = 'scale(1)';
-                }, 150);
+                    e.target.style.transition = 'transform 0.2s ease';
+                }, 100);
+            }
+        }, { passive: true });
+        
+        // Prevent double-tap zoom on tablets
+        document.addEventListener('touchend', function(e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
             }
         });
+        
+        // Handle tablet orientation changes
+        window.addEventListener('orientationchange', function() {
+            setTimeout(() => {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }, 100);
+        });
 
-        // Initialize swarm systems
+        // Initialize swarm systems with tablet optimizations
         document.addEventListener('DOMContentLoaded', function() {
+            // Set initial viewport height for tablets
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            
+            // Enable smooth scrolling for all scrollable elements
+            document.querySelectorAll('.swarm-control, .intelligence-timeline, .decision-feed, .comm-display').forEach(element => {
+                element.style.scrollBehavior = 'smooth';
+            });
+            
             // Start with some initial swarm activity
             setTimeout(updateSwarmComm, 1000);
             setTimeout(updateDecisionTimeline, 2000);

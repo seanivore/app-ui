@@ -17,8 +17,9 @@
             font-family: 'Orbitron', monospace;
             background: radial-gradient(circle at center, #0a0015 0%, #000005 50%, #000000 100%);
             color: #00ffff;
-            overflow: hidden;
-            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            min-height: 100vh;
             position: relative;
         }
 
@@ -47,7 +48,7 @@
 
         /* Main Container */
         .magician-interface {
-            height: 100vh;
+            min-height: 100vh;
             display: grid;
             grid-template-columns: 1fr 2fr 1fr;
             grid-template-rows: 80px 1fr 120px;
@@ -145,6 +146,8 @@
                 0 0 30px rgba(255, 0, 255, 0.3),
                 inset 0 0 20px rgba(255, 0, 255, 0.1);
             overflow-y: auto;
+            overflow-x: hidden;
+            max-height: calc(100vh - 240px);
         }
 
         .panel-title {
@@ -275,7 +278,11 @@
         .knowledge-content {
             flex: 1;
             overflow-y: auto;
+            overflow-x: hidden;
             padding-right: 10px;
+            max-height: calc(100vh - 200px);
+            scrollbar-width: thin;
+            scrollbar-color: #ff00ff rgba(0, 0, 0, 0.3);
         }
 
         .knowledge-entry {
@@ -332,6 +339,8 @@
                 0 0 30px rgba(255, 255, 0, 0.3),
                 inset 0 0 20px rgba(255, 255, 0, 0.1);
             overflow-y: auto;
+            overflow-x: hidden;
+            max-height: calc(100vh - 240px);
         }
 
         .illusion-title {

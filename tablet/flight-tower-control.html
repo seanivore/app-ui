@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>ATC Workflow Monitor</title>
     <style>
         :root {
@@ -27,16 +27,22 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--dark-bg);
             color: var(--runway-white);
-            overflow: hidden;
-            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            min-height: 100vh;
             -webkit-user-select: none;
             user-select: none;
+            /* Tablet optimizations */
+            touch-action: manipulation;
+            -webkit-overflow-scrolling: touch;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .atc-interface {
             display: grid;
             grid-template-rows: 60px 1fr 200px;
-            height: 100vh;
+            min-height: 100vh;
+            height: auto;
             background: radial-gradient(circle at center, #0f0f0f 0%, #000000 100%);
         }
 
@@ -94,8 +100,8 @@
             grid-template-columns: 1fr 300px;
             gap: 20px;
             padding: 20px;
-            height: 100%;
-            overflow: hidden;
+            min-height: calc(100vh - 260px);
+            overflow: visible;
         }
 
         .radar-display {
@@ -283,6 +289,9 @@
             border-radius: 10px;
             padding: 15px;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            max-height: calc(100vh - 300px);
         }
 
         .panel-section {
@@ -355,6 +364,10 @@
             border-top: 2px solid var(--radar-green);
             padding: 15px 20px;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            min-height: 200px;
+            max-height: 300px;
         }
 
         .timeline-header {
@@ -399,6 +412,8 @@
             display: flex;
             gap: 15px;
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
             padding-bottom: 10px;
         }
 
@@ -472,8 +487,120 @@
             box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
+        /* Tablet Optimizations */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .atc-interface {
+                grid-template-rows: 70px 1fr 180px;
+            }
+            
+            .control-header {
+                padding: 0 24px;
+            }
+            
+            .tower-id {
+                font-size: 20px;
+            }
+            
+            .weather-display {
+                gap: 16px;
+                font-size: 13px;
+            }
+            
+            .radar-section {
+                grid-template-columns: 1fr 280px;
+                gap: 16px;
+                padding: 16px;
+                min-height: calc(100vh - 250px);
+            }
+            
+            .radar-display {
+                min-height: 400px;
+            }
+            
+            .control-panel {
+                padding: 12px;
+                max-height: calc(100vh - 270px);
+            }
+            
+            .flight-info {
+                padding: 8px;
+                margin-bottom: 6px;
+                border-radius: 6px;
+            }
+            
+            .activity-timeline {
+                padding: 12px 16px;
+                min-height: 180px;
+                max-height: 250px;
+            }
+            
+            .timeline-item {
+                min-width: 220px;
+                padding: 10px;
+            }
+            
+            .comm-panel {
+                width: 260px;
+                bottom: 16px;
+                right: 16px;
+            }
+            
+            .comm-display {
+                height: 90px;
+                padding: 10px;
+            }
+            
+            /* Aircraft touch targets */
+            .aircraft {
+                width: 16px;
+                height: 16px;
+                cursor: pointer;
+                touch-action: manipulation;
+            }
+            
+            .aircraft::before {
+                width: 24px;
+                height: 24px;
+                top: -4px;
+                left: -4px;
+            }
+            
+            /* Enhanced scrollbars for tablet */
+            .control-panel::-webkit-scrollbar,
+            .activity-timeline::-webkit-scrollbar,
+            .timeline-feed::-webkit-scrollbar,
+            .comm-display::-webkit-scrollbar {
+                width: 8px;
+                height: 8px;
+            }
+            
+            .control-panel::-webkit-scrollbar-track,
+            .activity-timeline::-webkit-scrollbar-track,
+            .timeline-feed::-webkit-scrollbar-track,
+            .comm-display::-webkit-scrollbar-track {
+                background: rgba(0, 255, 65, 0.1);
+                border-radius: 4px;
+            }
+            
+            .control-panel::-webkit-scrollbar-thumb,
+            .activity-timeline::-webkit-scrollbar-thumb,
+            .timeline-feed::-webkit-scrollbar-thumb,
+            .comm-display::-webkit-scrollbar-thumb {
+                background: var(--radar-green);
+                border-radius: 4px;
+                opacity: 0.6;
+            }
+            
+            .control-panel::-webkit-scrollbar-thumb:hover,
+            .activity-timeline::-webkit-scrollbar-thumb:hover,
+            .timeline-feed::-webkit-scrollbar-thumb:hover,
+            .comm-display::-webkit-scrollbar-thumb:hover {
+                opacity: 1;
+            }
+        }
+        
+        /* Mobile/Small Tablet */
+        @media (max-width: 767px) {
             .radar-section {
                 grid-template-columns: 1fr;
                 grid-template-rows: 1fr 250px;
@@ -491,10 +618,13 @@
             }
         }
 
-        /* Touch Interactions */
+        /* Enhanced Touch Interactions for Tablet */
         .touch-feedback {
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            touch-action: manipulation;
         }
 
         .touch-feedback::after {
@@ -513,6 +643,32 @@
         .touch-feedback:active::after {
             width: 100px;
             height: 100px;
+        }
+        
+        /* Tablet-specific hover effects */
+        .touch-feedback:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 255, 65, 0.2);
+        }
+        
+        /* Minimum touch target sizes for tablet */
+        .emergency-button,
+        .control-button,
+        .flight-info,
+        .timeline-item {
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+        
+        .aircraft {
+            min-width: 14px;
+            min-height: 14px;
+            touch-action: manipulation;
+        }
+        
+        .comm-input {
+            min-height: 44px;
+            touch-action: manipulation;
         }
     </style>
 </head>
@@ -852,23 +1008,75 @@
         setInterval(updateCommDisplay, 8000);
         setInterval(updateTimeline, 12000);
 
-        // Add touch feedback for mobile
+        // Enhanced touch feedback for tablets
         document.addEventListener('touchstart', function (e) {
             if (e.target.classList.contains('touch-feedback')) {
                 e.target.style.transform = 'scale(0.95)';
+                e.target.style.transition = 'transform 0.1s ease';
             }
-        });
+        }, { passive: true });
 
         document.addEventListener('touchend', function (e) {
             if (e.target.classList.contains('touch-feedback')) {
                 setTimeout(() => {
                     e.target.style.transform = 'scale(1)';
-                }, 150);
+                    e.target.style.transition = 'transform 0.2s ease';
+                }, 100);
+            }
+        }, { passive: true });
+        
+        // Prevent double-tap zoom on tablets
+        document.addEventListener('touchend', function(e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
             }
         });
+        
+        // Enhanced tablet scrolling behavior
+        function initializeTabletScrolling() {
+            const scrollableElements = document.querySelectorAll('.control-panel, .activity-timeline, .timeline-feed, .comm-display');
+            
+            scrollableElements.forEach(element => {
+                // Smooth scroll to top on double-tap header
+                const header = document.querySelector('.control-header');
+                if (header) {
+                    let lastTap = 0;
+                    header.addEventListener('touchend', function(e) {
+                        const currentTime = new Date().getTime();
+                        const tapLength = currentTime - lastTap;
+                        if (tapLength < 500 && tapLength > 0) {
+                            element.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                        lastTap = currentTime;
+                    });
+                }
+            });
+        }
+        
+        // Handle tablet orientation changes
+        window.addEventListener('orientationchange', function() {
+            setTimeout(() => {
+                // Recalculate viewport dimensions
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+                
+                // Re-initialize scrolling if needed
+                initializeTabletScrolling();
+            }, 100);
+        });
 
-        // Initial setup
+        // Initial setup with tablet optimizations
         document.addEventListener('DOMContentLoaded', function () {
+            // Set initial viewport height for tablets
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            
+            // Initialize tablet scrolling
+            initializeTabletScrolling();
+            
+            // Enable smooth scrolling
+            document.documentElement.style.scrollBehavior = 'smooth';
+            
             // Start with some initial messages
             setTimeout(updateCommDisplay, 1000);
             setTimeout(updateTimeline, 2000);

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Maritime Operations Command - Fleet Orchestration Monitor</title>
     <style>
         * {
@@ -19,6 +19,9 @@
             -webkit-user-select: none;
             user-select: none;
             position: relative;
+            /* Tablet optimizations */
+            touch-action: manipulation;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* Maritime Background Effects */
@@ -43,7 +46,8 @@
         .container {
             position: relative;
             z-index: 1;
-            height: 100vh;
+            min-height: 100vh;
+            height: auto;
             display: flex;
             flex-direction: column;
             padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
@@ -481,6 +485,7 @@
             height: calc(100% - 50px);
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
         }
 
         .timeline-item {
@@ -618,6 +623,110 @@
             letter-spacing: 1px;
         }
 
+        /* Tablet Optimizations */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .command-header {
+                padding: 12px 16px 8px;
+            }
+            
+            .command-title {
+                font-size: 16px;
+            }
+            
+            .navigation-stats {
+                gap: 12px;
+                font-size: 11px;
+            }
+            
+            .main-content {
+                gap: 10px;
+                padding: 12px;
+            }
+            
+            .fleet-monitor {
+                height: 200px;
+                padding: 12px;
+            }
+            
+            .monitor-title {
+                font-size: 14px;
+            }
+            
+            .vessel-card {
+                padding: 10px;
+                border-radius: 10px;
+            }
+            
+            .vessel-name {
+                font-size: 13px;
+            }
+            
+            .mission-control {
+                height: 140px;
+                padding: 12px;
+            }
+            
+            .mission-title {
+                font-size: 14px;
+            }
+            
+            .mission-details {
+                padding: 10px;
+                border-radius: 10px;
+            }
+            
+            .activity-timeline {
+                padding: 12px;
+            }
+            
+            .timeline-title {
+                font-size: 14px;
+            }
+            
+            .timeline-item {
+                padding: 10px;
+                margin-bottom: 12px;
+                border-radius: 10px;
+            }
+            
+            /* Enhanced touch targets for tablet */
+            .vessel-card {
+                min-height: 60px;
+                touch-action: manipulation;
+                cursor: pointer;
+            }
+            
+            .vessel-card:hover {
+                transform: scale(1.02);
+                box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+            }
+            
+            .nav-stat {
+                min-height: 32px;
+                touch-action: manipulation;
+            }
+            
+            /* Enhanced scrollbar for tablet */
+            .timeline-content::-webkit-scrollbar {
+                width: 8px;
+            }
+            
+            .timeline-content::-webkit-scrollbar-track {
+                background: rgba(33, 150, 243, 0.1);
+                border-radius: 4px;
+            }
+            
+            .timeline-content::-webkit-scrollbar-thumb {
+                background: var(--sky-blue);
+                border-radius: 4px;
+                opacity: 0.6;
+            }
+            
+            .timeline-content::-webkit-scrollbar-thumb:hover {
+                opacity: 1;
+            }
+        }
+        
         /* Responsive Design for iOS */
         @media (max-height: 700px) {
             .fleet-monitor { height: 200px; }
@@ -1095,26 +1204,38 @@
             }, 30000);
         }
 
-        // Add touch event listeners for all interactive elements
+        // Enhanced tablet interactions and initialization
         document.addEventListener('DOMContentLoaded', function() {
+            // Set initial viewport height for tablets
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            
             const interactiveElements = document.querySelectorAll('.vessel-card, .nav-stat, .mission-priority, .timeline-filter');
             
             interactiveElements.forEach(element => {
-                element.addEventListener('touchstart', createRipple);
+                element.addEventListener('touchstart', createRipple, { passive: true });
+                
+                // Enhanced tablet hover effects
+                element.addEventListener('touchend', function() {
+                    this.style.transition = 'all 0.2s ease';
+                }, { passive: true });
             });
+            
+            // Enhanced scrolling behavior for tablet
+            const timelineContent = document.getElementById('timelineContent');
+            timelineContent.style.scrollBehavior = 'smooth';
             
             // Start simulations
             simulateFleetOperations();
             updateCoordinates();
             updateWeatherConditions();
             
-            // Auto-scroll timeline
-            const timelineContent = document.getElementById('timelineContent');
+            // Auto-scroll timeline with better tablet behavior
             setInterval(() => {
                 if (timelineContent.scrollTop === 0) {
-                    timelineContent.scrollTop = timelineContent.scrollHeight;
+                    timelineContent.scrollTo({ top: timelineContent.scrollHeight, behavior: 'smooth' });
                 } else {
-                    timelineContent.scrollTop = 0;
+                    timelineContent.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             }, 25000);
         });
@@ -1133,13 +1254,26 @@
             }
         }
 
-        // Handle orientation changes
+        // Enhanced tablet orientation handling
         window.addEventListener('orientationchange', function() {
             setTimeout(() => {
-                // Recalculate layouts if needed
+                // Recalculate layouts for tablet
                 const vh = window.innerHeight * 0.01;
                 document.documentElement.style.setProperty('--vh', `${vh}px`);
+                
+                // Re-initialize smooth scrolling
+                const timelineContent = document.getElementById('timelineContent');
+                if (timelineContent) {
+                    timelineContent.style.scrollBehavior = 'smooth';
+                }
             }, 100);
+        });
+        
+        // Prevent double-tap zoom on tablets
+        document.addEventListener('touchend', function(e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
         });
 
         // Initialize viewport height for iOS

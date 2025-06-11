@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Cellular Orchestra - Workflow Monitor</title>
     <style>
         :root {
@@ -34,6 +34,9 @@
             user-select: none;
             -webkit-touch-callout: none;
             -webkit-tap-highlight-color: transparent;
+            /* Tablet optimization */
+            touch-action: manipulation;
+            -webkit-overflow-scrolling: touch;
         }
 
         .orchestra-interface {
@@ -532,8 +535,60 @@
             50% { transform: translateY(-4px); }
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
+        /* Tablet Optimizations */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .orchestra-interface {
+                grid-template-rows: 70px 1fr 160px;
+            }
+            
+            .conductor-podium {
+                padding: 0 24px;
+            }
+            
+            .orchestra-title {
+                font-size: 22px;
+            }
+            
+            .tempo-display {
+                gap: 20px;
+                font-size: 13px;
+            }
+            
+            .symphony-hall {
+                grid-template-columns: 1fr 280px;
+                gap: 16px;
+                padding: 16px;
+            }
+            
+            .orchestra-sections {
+                padding: 12px;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .agent-card {
+                padding: 10px;
+                margin-bottom: 6px;
+                border-radius: 8px;
+            }
+            
+            .musical-timeline {
+                padding: 12px 16px;
+            }
+            
+            .musical-measures {
+                gap: 12px;
+                padding-bottom: 8px;
+            }
+            
+            .measure {
+                min-width: 180px;
+                padding: 10px;
+            }
+        }
+        
+        /* Mobile/Small Tablet */
+        @media (max-width: 767px) {
             .symphony-hall {
                 grid-template-columns: 1fr;
                 grid-template-rows: 1fr 280px;
@@ -552,10 +607,12 @@
             }
         }
 
-        /* Touch Interactions */
+        /* Enhanced Touch Interactions for Tablet */
         .touch-feedback {
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
         .touch-feedback::after {
@@ -574,6 +631,31 @@
         .touch-feedback:active::after {
             width: 120px;
             height: 120px;
+        }
+        
+        /* Tablet-specific touch targets */
+        .touch-feedback:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+        }
+        
+        /* Increase touch target sizes for tablet */
+        .agent-organelle {
+            min-width: 28px;
+            min-height: 28px;
+            touch-action: manipulation;
+        }
+        
+        .metronome-button,
+        .score-button {
+            min-height: 44px;
+            min-width: 44px;
+            touch-action: manipulation;
+        }
+        
+        .agent-card {
+            min-height: 60px;
+            touch-action: manipulation;
         }
 
         /* Special musical time signature indicators */
@@ -1033,19 +1115,37 @@
         setInterval(updateTempo, 8000);
         setInterval(updatePerformanceMetrics, 5000);
         
-        // Touch feedback for iOS
+        // Enhanced touch feedback for tablets
         document.addEventListener('touchstart', function(e) {
             if (e.target.classList.contains('touch-feedback')) {
                 e.target.style.transform = 'scale(0.95)';
+                e.target.style.transition = 'transform 0.1s ease';
             }
-        });
+        }, { passive: true });
         
         document.addEventListener('touchend', function(e) {
             if (e.target.classList.contains('touch-feedback')) {
                 setTimeout(() => {
                     e.target.style.transform = 'scale(1)';
-                }, 150);
+                    e.target.style.transition = 'transform 0.2s ease';
+                }, 100);
             }
+        }, { passive: true });
+        
+        // Prevent double-tap zoom on tablets
+        document.addEventListener('touchend', function(e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+        
+        // Handle tablet orientation changes
+        window.addEventListener('orientationchange', function() {
+            setTimeout(() => {
+                // Recalculate viewport dimensions
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }, 100);
         });
 
         // Cellular division animation triggers
@@ -1063,10 +1163,19 @@
 
         setInterval(triggerCellularDivision, 12000);
 
-        // Initialize on load
+        // Initialize on load with tablet optimizations
         document.addEventListener('DOMContentLoaded', function() {
+            // Set initial viewport height for tablets
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            
             setTimeout(updateMusicalScore, 2000);
             setTimeout(updateTempo, 1000);
+            
+            // Enable smooth scrolling for tablet
+            document.querySelectorAll('.orchestra-sections, .musical-measures').forEach(element => {
+                element.style.scrollBehavior = 'smooth';
+            });
         });
     </script>
 </body>
