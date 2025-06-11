@@ -111,3 +111,14 @@ https://app.august.style/web/           # Web applications
 https://app.august.style/tablet/        # Tablet app interfaces 
 https://app.august.style/messenger/     # Chat app interfaces 
 ```
+
+### Portfolio Website Development 
+
+1. Workflow prompt is set to command line file directory 
+2. Development and design prompt follows as argument to activate workflow 
+3. Skip permissions because NBD, everything is committed up to date 
+
+```zsh
+claude --dangerously-skip-permissions
+/project:multistage ui_portfolio_spec.md
+```
